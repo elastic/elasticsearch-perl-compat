@@ -8,6 +8,11 @@ our $instances = 3;
 our $es_version;
 
 BEGIN {
+    unless ( $ENV{ES_HOME} ) {
+        plan 'skip_all' => 'ES_HOME not set';
+        exit;
+    }
+
     use_ok 'Elasticsearch::Compat'     || print "Bail out!";
     use_ok 'Elasticsearch::TestServer' || print "Bail out!";
 }
@@ -22,7 +27,7 @@ our $es = Elasticsearch::Compat->new(
     servers => $nodes,
 
     #[ 'localhost:9200', 'localhost:9201', 'localhost:9202' ],
-        trace_calls => 'log'
+    trace_calls => 'log'
 );
 
 $es_version = $es->current_server_version;

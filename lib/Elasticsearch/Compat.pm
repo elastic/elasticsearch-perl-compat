@@ -30,7 +30,10 @@ sub new {
     if ( $transport eq 'httplite' ) {
         warn "Transport <httplite> is not supported. Using <httptiny>";
     }
-    $params{cxn} = $transport eq 'http' ? 'LWP' : 'HTTPTiny';
+    $params{cxn}
+        = $transport eq 'httptiny' ? 'HTTPTiny'
+        : $transport eq 'curl'     ? 'NetCurl'
+        :                            'LWP';
 
     # trace_calls
     if ( my $trace = delete $orig->{trace_calls} ) {
@@ -65,10 +68,11 @@ accepted by the old module to the parameters accepted by the new module. All
 tests in the old test suite pass.
 
 However, the networking layer has been replaced by the new L<Elasticsearch>
-module. Currently the only available transport backends are C<http> (L<LWP>)
-and C<httptiny> (L<HTTP::Tiny>).  Soon there will also be a L<Net::Curl>
-backend.  The L<AnyEvent> backends are not supported. That may change in
-the future.
+module. The available transport backends are C<http> (L<LWP>
+via L<Elasticsearch::Cxn::LWP>), C<httptiny> (L<HTTP::Tiny>
+via L<Elasticsearch::Cxn::HTTPTiny> and C<curl> (L<Net::Curl> via
+L<Elasticsearch::Cxn::NetCurl>).  The L<AnyEvent> backends are not supported.
+That may change in the future.
 
 No further development of this compatibility layer is planned.  It allows
 you to use your old code without change (other than the module name), but
@@ -141,14 +145,17 @@ C<servers> list only. Failed nodes will be removed from the list
 
 =head3 Transport Backends
 
-There are two C<transport> backends that Elasticsearch::Compat can use:
-C<http> (the default, based on LWP) and C<httptiny> (based on L<HTTP::Tiny>).
-The C<AnyEvent> based transports are not supported by Elasticsearch::Compat.
+There are three C<transport> backends that Elasticsearch::Compat can use:
+C<http> (L<LWP> via L<Elasticsearch::Cxn::LWP>), C<httptiny> (L<HTTP::Tiny>
+via L<Elasticsearch::Cxn::HTTPTiny> and C<curl> (L<Net::Curl> via
+L<Elasticsearch::Cxn::NetCurl>).  The L<AnyEvent> backends are not supported.
 
 The C<httptiny> backend is faster than C<http>, but does not use persistent
 connections. If you want to use it, make sure that your open filehandles limit
 (C<ulimit -l>) is high, or your connections may hang because your system runs
-out of sockets.
+out of sockets. The C<curl> backend is the fastest and uses persistent
+connections, but must be installed separately as it relies on
+C<libcurl>.
 
 =cut
 
