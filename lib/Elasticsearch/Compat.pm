@@ -7,7 +7,7 @@ use Scalar::Util qw(openhandle);
 use Elasticsearch::Util qw(parse_params);
 use namespace::clean;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 #===================================
 sub new {
