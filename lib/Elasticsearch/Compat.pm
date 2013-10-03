@@ -1,7 +1,7 @@
 package Elasticsearch::Compat;
 
 use Moo;
-use Elasticsearch 0.73;
+use Elasticsearch 0.74;
 
 use Scalar::Util qw(openhandle);
 use Elasticsearch::Util qw(parse_params);
@@ -15,12 +15,14 @@ sub new {
     my ( $class, $orig ) = parse_params(@_);
     my %params = (
         nodes           => delete $orig->{servers},
-        request_timeout => delete $orig->{timeout},
         cxn_pool        => delete $orig->{no_refresh} ? 'Static' : 'Sniff',
         client          => 'Compat',
         deflate            => delete $orig->{deflate}            || 0,
         max_content_length => delete $orig->{max_content_length} || 0
     );
+
+    $params{request_timeout} = delete $orig->{timeout}
+        if $orig->{timeout};
 
     # transport
     my $transport = delete $orig->{transport} || 'http';
