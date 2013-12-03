@@ -8,7 +8,7 @@ my $r;
 
 ### CREATE INDEX ###
 ok $es->create_index( index => 'es_test_1' )->{ok}, 'Created index';
-throws_ok { $es->create_index( index => 'es_test_1' ) } qr/Already exists/,
+throws_ok { $es->create_index( index => 'es_test_1' ) } qr/[Aa]lready exists/,
     ' - second create fails';
 
 throws_ok { $es->create_index( index => [ 'es_test_1', 'es_test_2' ] ) }
