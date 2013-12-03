@@ -1,7 +1,7 @@
 package Elasticsearch::Compat;
 
 use Moo;
-use Elasticsearch 0.74;
+use Elasticsearch 0.76;
 
 use Scalar::Util qw(openhandle);
 use Elasticsearch::Util qw(parse_params);
