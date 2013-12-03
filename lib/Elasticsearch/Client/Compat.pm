@@ -505,6 +505,7 @@ sub _bulk {
                 consistency => CONSISTENCY,
                 replication => REPLICATION,
                 refresh     => [ 'boolean', 1 ],
+                timeout     => ['duration'],
                 on_conflict => ['coderef'],
                 on_error    => ['coderef'],
             },
