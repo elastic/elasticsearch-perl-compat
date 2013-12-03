@@ -932,7 +932,9 @@ sub msearch {
 
 my %MSearch = (
     ( map { $_ => 'h' } 'index', 'type', keys %{ $Search_Defn{qs} } ),
-    ( map { $_ => 'b' } 'version', keys %{ $Search_Defn{data} } )
+    (   map { $_ => 'b' } 'timeout', 'stats',
+        'version', keys %{ $Search_Defn{data} }
+    )
 );
 delete $MSearch{scroll};
 
