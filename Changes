@@ -1,5 +1,11 @@
 Revision history for Elasticsearch-Compat
 
+0.03    2013-12-03
+        Bumped Elasticsearch dependency to 0.76
+        Fixed test suite for ES 0.90.7
+        Fixed timeout param in mget
+        Added timeout param in bulk
+
 0.02    2013-10-03
         Fixed a bug when not specifying a timeout
 
