@@ -1,5 +1,9 @@
 Revision history for Elasticsearch-Compat
 
+0.04    2014-02-27
+        Changed the dependency list to rely on Elasticsearch, rather
+        than on classes within that dist.
+
 0.03    2013-12-03
         Bumped Elasticsearch dependency to 0.76
         Fixed test suite for ES 0.90.7
