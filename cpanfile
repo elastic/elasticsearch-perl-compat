@@ -1,8 +1,6 @@
 requires "Any::URI::Escape" => "0";
 requires "Carp" => "0";
 requires "Elasticsearch" => "0.76";
-requires "Elasticsearch::Role::Client" => "0";
-requires "Elasticsearch::Util" => "0";
 requires "JSON" => "0";
 requires "Moo" => "0";
 requires "Scalar::Util" => "0";
@@ -22,7 +20,7 @@ on 'test' => sub {
   requires "ElasticSearch::SearchBuilder" => "0";
   requires "Test::Differences" => "0";
   requires "Test::Exception" => "0";
-  requires "Test::More" => "0.96";
+  requires "Test::More" => "0.98";
   requires "lib" => "0";
 };
 
