@@ -1,13 +1,13 @@
 package Search::Elasticsearch::Compat;
 
 use Moo;
-use Elasticsearch 0.76;
+use Search::Elasticsearch 1.10;
 
 use Scalar::Util qw(openhandle);
 use Search::Elasticsearch::Util qw(parse_params);
 use namespace::clean;
 
-our $VERSION = '0.04';
+our $VERSION = '0.10';
 
 #===================================
 sub new {
