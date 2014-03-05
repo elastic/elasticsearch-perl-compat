@@ -1,22 +1,22 @@
-package Elasticsearch::Compat;
+package Search::Elasticsearch::Compat;
 
 use Moo;
-use Elasticsearch 1.05;
+use Elasticsearch 0.76;
 
 use Scalar::Util qw(openhandle);
-use Elasticsearch::Util qw(parse_params);
+use Search::Elasticsearch::Util qw(parse_params);
 use namespace::clean;
 
-our $VERSION = '0.05';
+our $VERSION = '0.04';
 
 #===================================
 sub new {
 #===================================
     my ( $class, $orig ) = parse_params(@_);
     my %params = (
-        nodes           => delete $orig->{servers},
-        cxn_pool        => delete $orig->{no_refresh} ? 'Static' : 'Sniff',
-        client          => 'Compat',
+        nodes    => delete $orig->{servers},
+        cxn_pool => delete $orig->{no_refresh} ? 'Static' : 'Sniff',
+        client   => 'Compat',
         deflate            => delete $orig->{deflate}            || 0,
         max_content_length => delete $orig->{max_content_length} || 0
     );
@@ -47,51 +47,38 @@ sub new {
             :   die "Unrecognised value for <trace_requests>";
     }
 
-    return Elasticsearch->new( %params, %$orig );
+    return Search::Elasticsearch->new( %params, %$orig );
 }
 
 1;
 
 __END__
 
-# ABSTRACT: DEPRECATED: A compatibility layer for migrating from ElasticSearch.pm
+# ABSTRACT: A compatibility layer for migrating from ElasticSearch.pm
 
 =head1 DESCRIPTION
 
-B<THIS MODULE IS DEPRECATED.>
-
-******************************************************************************
-
-Because of the name clash between C<ElasticSearch.pm> and C<Elasticsearch.pm>
-this module has been renamed to : L<Search::Elasticsearch::Compat>.
-
-See L<https://github.com/elasticsearch/elasticsearch-perl/issues/20> for details.
-
-This distribution will be removed from CPAN in 2015. Please update your code.
-
-******************************************************************************
-
-With the release of the official new L<Elasticsearch> module, the old
+With the release of the official new L<Search::Elasticsearch> module, the old
 L<ElasticSearch> (note the change in case) module has been deprecated. This module,
-L<Elasticsearch::Compat> is a compatibility layer to help migrate
+L<Search::Elasticsearch::Compat> is a compatibility layer to help migrate
 existing code from the old module to the new.
 
 The client interface (ie L</new()> plus all request methods like
-L<search()|Elasticsearch::Client::Compat/search()>) are completely compatible
-with the old Elasticsearch.pm. The L</new()> method translates the parameters
+L<search()|Search::Elasticsearch::Client::Compat/search()>) are completely compatible
+with the old ElasticSearch.pm. The L</new()> method translates the parameters
 accepted by the old module to the parameters accepted by the new module. All
 tests in the old test suite pass.
 
-However, the networking layer has been replaced by the new L<Elasticsearch>
+However, the networking layer has been replaced by the new L<Search::Elasticsearch>
 module. The available transport backends are C<http> (L<LWP>
-via L<Elasticsearch::Cxn::LWP>), C<httptiny> (L<HTTP::Tiny>
-via L<Elasticsearch::Cxn::HTTPTiny> and C<curl> (L<Net::Curl> via
-L<Elasticsearch::Cxn::NetCurl>).  The L<AnyEvent> backends are not supported.
+via L<Search::Elasticsearch::Cxn::LWP>), C<httptiny> (L<HTTP::Tiny>
+via L<Search::Elasticsearch::Cxn::HTTPTiny> and C<curl> (L<Net::Curl> via
+L<Search::Elasticsearch::Cxn::NetCurl>).  The L<AnyEvent> backends are not supported.
 That may change in the future.
 
 No further development of this compatibility layer is planned.  It allows
 you to use your old code without change (other than the module name), but
-new code should use the new L<Elasticsearch> module.
+new code should use the new L<Search::Elasticsearch> module.
 
 To use this module, you will need to change:
 
@@ -100,24 +87,24 @@ To use this module, you will need to change:
 
 to
 
-    use Elasticsearch::Compat;
-    my $e = Elasticsearch::Compat->new(...);
+    use Search::Elasticsearch::Compat;
+    my $e = Search::Elasticsearch::Compat->new(...);
 
 You can use the official client in the same code as the compatibility
 layer with:
 
-    use Elasticsearch;
-    use Elasticsearch::Compat;
+    use Search::Elasticsearch;
+    use Search::Elasticsearch::Compat;
 
-    my $new_es = Elasticsearch->new(...);
-    my $old_es = Elasticsearch::Compat->new(...);
+    my $new_es = Search::Elasticsearch->new(...);
+    my $old_es = Search::Elasticsearch::Compat->new(...);
 
 
-=head1 Creating a new Elasticsearch::Compat instance
+=head1 Creating a new Search::Elasticsearch::Compat instance
 
 =head2 new()
 
-    $es = Elasticsearch::Compat->new(
+    $es = Search::Elasticsearch::Compat->new(
             transport    =>  'http',
             servers      =>  '127.0.0.1:9200'                   # single server
                               | ['es1.foo.com:9200',
@@ -131,8 +118,8 @@ layer with:
      );
 
 The L</new()> method translates the parameters accepted by the old module into
-parameters accepted by the new L<Elasticsearch> module, and
-returns an L<Elasticsearch::Client::Compat> instance,
+parameters accepted by the new L<Search::Elasticsearch> module, and
+returns an L<Search::Elasticsearch::Client::Compat> instance,
 which provides the same methods as were available in the old L<ElasticSearch>
 module.
 
@@ -160,10 +147,10 @@ C<servers> list only. Failed nodes will be removed from the list
 
 =head3 Transport Backends
 
-There are three C<transport> backends that Elasticsearch::Compat can use:
-C<http> (L<LWP> via L<Elasticsearch::Cxn::LWP>), C<httptiny> (L<HTTP::Tiny>
-via L<Elasticsearch::Cxn::HTTPTiny> and C<curl> (L<Net::Curl> via
-L<Elasticsearch::Cxn::NetCurl>).  The L<AnyEvent> backends are not supported.
+There are three C<transport> backends that Search::Elasticsearch::Compat can use:
+C<http> (L<LWP> via L<Search::Elasticsearch::Cxn::LWP>), C<httptiny> (L<HTTP::Tiny>
+via L<Search::Elasticsearch::Cxn::HTTPTiny> and C<curl> (L<Net::Curl> via
+L<Search::Elasticsearch::Cxn::NetCurl>).  The L<AnyEvent> backends are not supported.
 
 The C<httptiny> backend is faster than C<http>, but does not use persistent
 connections. If you want to use it, make sure that your open filehandles limit
@@ -176,14 +163,14 @@ C<libcurl>.
 
 =head1 OTHER METHODS
 
-See L<Elasticsearch::Client::Compat> for documenation of methods supported
+See L<Search::Elasticsearch::Client::Compat> for documenation of methods supported
 by the client.
 
 =head1 SUPPORT
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc Elasticsearch::Compat
+    perldoc Search::Elasticsearch::Compat
 
 You can also look for information at:
 
@@ -195,7 +182,7 @@ L<http://github.com/elasticsearch/elasticsearch-perl-compat>
 
 =item * Search MetaCPAN
 
-L<https://metacpan.org/module/Elasticsearch::Compat>
+L<https://metacpan.org/module/Search::Elasticsearch::Compat>
 
 =item * IRC
 
@@ -212,7 +199,7 @@ The main L<Elasticsearch mailing list|http://www.elasticsearch.org/community/for
 
 The full test suite requires a live Elasticsearch cluster to run.  CPAN
 testers doesn't support this.  You can see full test results here:
-L<http://travis-ci.org/#!/clintongormley/Elasticsearch::Compat/builds>.
+L<http://travis-ci.org/#!/clintongormley/Search::Elasticsearch::Compat/builds>.
 
 To run the full test suite locally, run it as:
 

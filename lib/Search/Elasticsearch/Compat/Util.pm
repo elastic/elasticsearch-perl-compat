@@ -1,8 +1,8 @@
-package Elasticsearch::Compat::Util;
+package Search::Elasticsearch::Compat::Util;
 
 use strict;
 use warnings;
-use Sub::Exporter -setup => {    exports => [ 'filter_keywords']};
+use Sub::Exporter -setup => { exports => ['filter_keywords'] };
 
 #===================================
 sub filter_keywords {
@@ -40,7 +40,7 @@ sub filter_keywords {
 
 =head1 SYNOPSIS
 
-    use Elasticsearch::Compat::Util qw(filter_keywords);
+    use Search::Elasticsearch::Compat::Util qw(filter_keywords);
 
     my $filtered = filter_keywords($unfiltered)
 
@@ -49,12 +49,12 @@ sub filter_keywords {
 =head2 filter_keywords()
 
 This tidies up a string to be used as a query string in (eg)
-L<Elasticsearch::Compat/"search()"> so that user input won't cause a search query
+L<Search::Elasticsearch::Compat/"search()"> so that user input won't cause a search query
 to return an error.
 
 It is not flexible at all, and may or may not be useful to you.
 
-Have a look at L<Elasticsearch::Compat::QueryParser> which gives you much more control
+Have a look at L<Search::Elasticsearch::Compat::QueryParser> which gives you much more control
 over your query strings.
 
 The current implementation does the following:

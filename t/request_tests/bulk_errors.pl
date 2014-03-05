@@ -39,8 +39,8 @@ my %args = (
     index   => 'es_test_1',
     type    => 'test',
     refresh => 1,
-    actions => [ {
-            index => {
+    actions => [
+        {   index => {
                 id       => 1,
                 data     => { text => 'foo', num => 1 },
                 _version => 2

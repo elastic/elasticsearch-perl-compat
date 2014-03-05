@@ -1,4 +1,4 @@
-= Contributing to Elasticsearch.pm
+= Contributing to Search::Elasticsearch::Compat
 
 If you have a bugfix or new feature that you would like to contribute to
 Elasticsearch.pm, please find or open an issue about it first. Talk about

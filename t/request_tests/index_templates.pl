@@ -78,11 +78,11 @@ is $es->index_template( name => 'mytemplate' )
 ok $es->delete_index_template( name => 'mytemplate' )->{ok},
     'Delete template';
 
-throws_ok { $es->index_template( name => 'mytemplate' ) }
-qr/Missing/, ' - template deleted';
+throws_ok { $es->index_template( name => 'mytemplate' ) } qr/Missing/,
+    ' - template deleted';
 
-throws_ok { $es->delete_index_template( name => 'mytemplate' ) }
-qr/Missing/, ' - template missing';
+throws_ok { $es->delete_index_template( name => 'mytemplate' ) } qr/Missing/,
+    ' - template missing';
 ok !$es->delete_index_template( name => 'mytemplate', ignore_missing => 1 ),
     ' - ignore missing';
 1

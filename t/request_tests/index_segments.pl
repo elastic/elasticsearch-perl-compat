@@ -23,7 +23,7 @@ ok $r
 ok $r->{es_test_1}, ' - index 1';
 ok $r->{es_test_2}, ' - index 2';
 
-throws_ok { $es->index_segments( index => 'foo' ) }
-qr/Missing/, ' - index missing';
+throws_ok { $es->index_segments( index => 'foo' ) } qr/Missing/,
+    ' - index missing';
 
 1;

@@ -23,8 +23,8 @@ wait_for_es();
 
 ok $r= $es->bulk(
     refresh => 1,
-    actions => [ {
-            index => {
+    actions => [
+        {   index => {
                 index => 'es_test_1',
                 type  => 'test',
                 id    => 1,
@@ -92,8 +92,8 @@ is $es->count( match_all => {} )->{count}, 0, ' - 2 docs deleted';
 
 ok $r= $es->bulk(
     refresh => 1,
-    actions => [ {
-            index => {
+    actions => [
+        {   index => {
                 index   => 'es_test_1',
                 type    => 'test',
                 id      => 1,
@@ -164,8 +164,8 @@ ok $r->[2]{index}{_index} eq 'es_test_2'
 # Raw JSON data
 
 ok $es->bulk(
-    actions => [ {
-            index => {
+    actions => [
+        {   index => {
                 index => 'es_test_1',
                 type  => 'type_1',
                 id    => 6,

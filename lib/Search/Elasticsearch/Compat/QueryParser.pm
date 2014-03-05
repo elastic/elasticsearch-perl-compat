@@ -1,16 +1,17 @@
-package Elasticsearch::Compat::QueryParser;
+package Search::Elasticsearch::Compat::QueryParser;
 
 use strict;
 use warnings FATAL => 'all';
-use Elasticsearch::Util qw(parse_params throw);
+use Search::Elasticsearch::Util qw(parse_params throw);
 use Scalar::Util qw(weaken);
-@Elasticsearch::Error::QueryParser::ISA = 'Elasticsearch::Error';
+@Search::Elasticsearch::Error::QueryParser::ISA
+    = 'Search::Elasticsearch::Error';
 
 # ABSTRACT: Check or filter query strings
 
 =head1 DESCRIPTION
 
-Passing an illegal query string to Elasticsearch::Compat, the request will fail.
+Passing an illegal query string to Search::Elasticsearch::Compat, the request will fail.
 When using a query string from an external source, eg the keywords field
 from a web search form, it is important to filter it to avoid these
 failures.
@@ -18,7 +19,7 @@ failures.
 You may also want to allow or disallow certain query string features, eg
 the ability to search on a particular field.
 
-The L<Elasticsearch::Compat::QueryParser> takes care of this for you.
+The L<Search::Elasticsearch::Compat::QueryParser> takes care of this for you.
 
 See L<http://lucene.apache.org/java/3_0_3/queryparsersyntax.html>
 for more information about the Lucene Query String syntax, and
@@ -27,8 +28,8 @@ for custom Elasticsearch extensions to the query string syntax.
 
 =head1 SYNOPSIS
 
-    use Elasticsearch::Compat;
-    my $es = Elasticsearch::Compat->new(servers=>'127.0.0.1:9200');
+    use Search::Elasticsearch::Compat;
+    my $es = Search::Elasticsearch::Compat->new(servers=>'127.0.0.1:9200');
     my $qp = $es->query_parser(%opts);
 
     my $filtered_query_string = $qp->filter($unchecked_query_string)
@@ -48,10 +49,10 @@ For example:
 
 =head2 new()
 
-    my $qp = Elasticsearch::Compat::QueryParser->new(%opts);
+    my $qp = Search::Elasticsearch::Compat::QueryParser->new(%opts);
     my $qp = $es->query_parser(%opts);
 
-Creates a new L<Elasticsearch::Compat::QueryParser> object, and sets the passed in
+Creates a new L<Search::Elasticsearch::Compat::QueryParser> object, and sets the passed in
 options (see L</"OPTIONS">).
 
 =head2 filter()
@@ -107,7 +108,7 @@ the options set in L</"new()"> and apply only for the current run.
 
 For instance:
 
-    $qp = Elasticsearch::Compat::QueryParser->new(allow_fuzzy => 0);
+    $qp = Search::Elasticsearch::Compat::QueryParser->new(allow_fuzzy => 0);
 
     $qs = "foo~0.5 bar^2 foo:baz";
 

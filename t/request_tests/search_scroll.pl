@@ -42,7 +42,7 @@ isa_ok $r = $es->scrolled_search(
     scroll => '2m',
     facets => { foo => { terms => { field => 'text' } } },
     ),
-    'Elasticsearch::Compat::ScrolledSearch';
+    'Search::Elasticsearch::Compat::ScrolledSearch';
 
 is $r->total, 25, ' - total';
 ok $r->max_score > 0, ' - max_score';
@@ -62,7 +62,7 @@ isa_ok $r = $es->scrolled_search(
     facets  => { foo => { terms => { field => 'text' } } },
     as_json => 1,
     ),
-    'Elasticsearch::Compat::ScrolledSearch';
+    'Search::Elasticsearch::Compat::ScrolledSearch';
 
 is $r->total, 25, ' - total';
 ok $r->max_score > 0, ' - max_score';

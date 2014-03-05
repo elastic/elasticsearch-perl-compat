@@ -141,8 +141,8 @@ SKIP: {
 
     # ALIASES
     eq_or_diff $em->aliases(
-        actions => [ {
-                add => {
+        actions => [
+            {   add => {
                     index   => 'foo',
                     alias   => 'foo',
                     filterb => { foo => 'bar' }
@@ -151,8 +151,8 @@ SKIP: {
         ]
         ),
         {
-        'actions' => [ {
-                'add' => {
+        'actions' => [
+            {   'add' => {
                     'index'  => 'foo',
                     'filter' => { 'term' => { 'foo' => 'bar' } },
                     'alias'  => 'foo'

@@ -13,17 +13,17 @@ BEGIN {
         exit;
     }
 
-    use_ok 'Elasticsearch::Compat'     || print "Bail out!";
-    use_ok 'Elasticsearch::TestServer' || print "Bail out!";
+    use_ok 'Search::Elasticsearch::Compat'     || print "Bail out!";
+    use_ok 'Search::Elasticsearch::TestServer' || print "Bail out!";
 }
 
-my $test_server = Elasticsearch::TestServer->new(
+my $test_server = Search::Elasticsearch::TestServer->new(
     instances => 3,
     es_home   => $ENV{ES_HOME}
 );
 my $nodes = $test_server->start;
 
-our $es = Elasticsearch::Compat->new(
+our $es = Search::Elasticsearch::Compat->new(
     servers => $nodes,
 
     #[ 'localhost:9200', 'localhost:9201', 'localhost:9202' ],

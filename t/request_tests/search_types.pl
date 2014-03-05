@@ -33,8 +33,8 @@ is $r->{hits}{total}, 29, ' - total correct';
 is @{ $r->{hits}{hits} }, 0, ' - zero results';
 
 # SCAN
-throws_ok { $es->search( search_type => 'scan' ) }
-qr/Request/, ' - scan without scroll';
+throws_ok { $es->search( search_type => 'scan' ) } qr/Request/,
+    ' - scan without scroll';
 
 ok $r = $es->search( search_type => 'scan', scroll => '2m', size => 1 ),
     ' - scan with scroll';

@@ -1,4 +1,8 @@
-Revision history for Elasticsearch-Compat
+Revision history for Search-Elasticsearch-Compat
+
+0.10    2014-03-05
+        Moved all modules to Search::Elasticsearch namespace.
+        See https://github.com/elasticsearch/elasticsearch-perl/issues/20
 
 0.05    2014-03-05
 

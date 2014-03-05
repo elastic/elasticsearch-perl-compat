@@ -4,9 +4,9 @@
 
 use Test::More tests => 207;
 
-use Elasticsearch::Compat::QueryParser;
+use Search::Elasticsearch::Compat::QueryParser;
 
-my $qp = Elasticsearch::Compat::QueryParser->new;
+my $qp = Search::Elasticsearch::Compat::QueryParser->new;
 
 #===================================
 # TOKENS

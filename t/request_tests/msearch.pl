@@ -46,8 +46,8 @@ is $r->{second}{hits}{hits}[0]{_index}, 'es_test_2', ' - custom index';
 is $r->{second}{hits}{hits}[0]{_type},  'type_2',    ' - custom type';
 
 ok $r= $es->msearch(
-    queries => [ {
-            index => [ 'es_test_1', 'es_test_2' ],
+    queries => [
+        {   index => [ 'es_test_1', 'es_test_2' ],
             type  => [ 'type_1',    'type_2' ],
 
             queryb  => { text => 'foo' },

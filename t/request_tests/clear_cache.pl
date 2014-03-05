@@ -42,8 +42,8 @@ ok $caches->{field}, ' - field cache not cleared';
 
 ok $es->clear_cache( id => 1, bloom => 1 )->{ok}, ' - cache types';
 
-throws_ok { $es->clear_cache( index => 'foo' ) }
-qr/Missing/, ' - index missing';
+throws_ok { $es->clear_cache( index => 'foo' ) } qr/Missing/,
+    ' - index missing';
 
 #===================================
 sub used_caches {

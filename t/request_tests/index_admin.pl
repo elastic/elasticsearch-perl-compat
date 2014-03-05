@@ -43,8 +43,8 @@ for my $method (
     qw(refresh_index flush_index optimize_index snapshot_index gateway_snapshot)
     )
 {
-    throws_ok { $es->$method( index => 'foo' ) }
-    qr/Missing/, "$method index missing";
+    throws_ok { $es->$method( index => 'foo' ) } qr/Missing/,
+        "$method index missing";
 }
 
 1

@@ -23,8 +23,8 @@ $es->delete_index( index => '_river' );
 sub missing {
 #===================================
     my $action = shift;
-    throws_ok { $es->$action( river => 'foobar' ) }
-    qr/Missing/, " - $action missing";
+    throws_ok { $es->$action( river => 'foobar' ) } qr/Missing/,
+        " - $action missing";
     ok !$es->$action( river => 'foobar', ignore_missing => 1 ),
         " - $action ignore_missing";
 }

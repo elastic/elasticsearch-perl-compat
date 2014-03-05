@@ -1,13 +1,13 @@
-package Elasticsearch::Client::Compat;
+package Search::Elasticsearch::Client::Compat;
 
 use Moo;
-with 'Elasticsearch::Role::Client';
+with 'Search::Elasticsearch::Role::Client';
 
 use strict;
 use warnings;
 use Any::URI::Escape qw(uri_escape);
 use JSON;
-use Elasticsearch::Util qw(throw parse_params);
+use Search::Elasticsearch::Util qw(throw parse_params);
 use Carp;
 
 has 'JSON'     => ( is => 'lazy' );
@@ -259,9 +259,9 @@ sub reindex {
 #===================================
 sub query_parser {
 #===================================
-    require Elasticsearch::Compat::QueryParser;
+    require Search::Elasticsearch::Compat::QueryParser;
     shift;    # drop class/$self
-    Elasticsearch::Compat::QueryParser->new(@_);
+    Search::Elasticsearch::Compat::QueryParser->new(@_);
 }
 
 ##################################
@@ -1073,8 +1073,8 @@ sub scroll {
 sub scrolled_search {
 #===================================
     my $self = shift;
-    require Elasticsearch::Compat::ScrolledSearch;
-    return Elasticsearch::Compat::ScrolledSearch->new( $self, @_ );
+    require Search::Elasticsearch::Compat::ScrolledSearch;
+    return Search::Elasticsearch::Compat::ScrolledSearch->new( $self, @_ );
 }
 
 #===================================
@@ -2287,7 +2287,7 @@ __END__
 
 =head1 DESCRIPTION
 
-See L<Elasticsearch::Compat> for an explanation of why this module exists.
+See L<Search::Elasticsearch::Compat> for an explanation of why this module exists.
 
 =head1 SYNOPSIS
 
@@ -3074,7 +3074,7 @@ data from one cluster to another.
 =item *
 
 C<source> is a required parameter, and should be an instance of
-L<Elasticsearch::Compat::ScrolledSearch>.
+L<Search::Elasticsearch::Compat::ScrolledSearch>.
 
 =item *
 
@@ -3109,10 +3109,10 @@ See L</Error handlers> for an explanation C<on_conflict> and C<on_error>.
 
 To copy the Elasticsearch website index locally, you could do:
 
-    my $local = Elasticsearch::Compat->new(
+    my $local = Search::Elasticsearch::Compat->new(
         servers => 'localhost:9200'
     );
-    my $remote = Elasticsearch::Compat->new(
+    my $remote = Search::Elasticsearch::Compat->new(
         servers    => 'search.elasticsearch.org:80',
         no_refresh => 1
     );
@@ -3163,7 +3163,7 @@ For example:
         dest_index  => 'new_index',
     );
 
-See also L</"scrolled_search()">, L<Elasticsearch::Compat::ScrolledSearch>,
+See also L</"scrolled_search()">, L<Search::Elasticsearch::Compat::ScrolledSearch>,
 and L</"search()">.
 
 =head3 analyze()
@@ -3391,7 +3391,7 @@ to L</"search()"> and requires a C<scroll> parameter, eg:
                                                  # live for 5 minutes
                 );
 
-See L<Elasticsearch::Compat::ScrolledSearch>, L</"search()">, L</"searchqs()">
+See L<Search::Elasticsearch::Compat::ScrolledSearch>, L</"search()">, L</"searchqs()">
 and L</"scroll()">.
 
 =head3 count()
@@ -4659,16 +4659,16 @@ Example: C<< $es->cluster_health >> is logged as:
 
     $qp = $es->query_parser(%opts);
 
-Returns an L<Elasticsearch::Compat::QueryParser> object for tidying up
+Returns an L<Search::Elasticsearch::Compat::QueryParser> object for tidying up
 query strings so that they won't cause an error when passed to Elasticsearch.
 
-See L<Elasticsearch::Compat::QueryParser> for more information.
+See L<Search::Elasticsearch::Compat::QueryParser> for more information.
 
 =head3 transport()
 
     $transport = $es->transport
 
-Returns the Transport object, eg L<Elasticsearch::Compat::Transport::HTTP>.
+Returns the Transport object, eg L<Search::Elasticsearch::Compat::Transport::HTTP>.
 
 =head3 timeout()
 
@@ -4699,7 +4699,7 @@ This automatic refresh can be disabled by setting C<max_requests> to C<0>:
 
 Or:
 
-    $es = Elasticsearch::Compat->new(
+    $es = Search::Elasticsearch::Compat->new(
             servers         => '127.0.0.1:9200',
             max_requests    => 0,
     );
@@ -4709,7 +4709,7 @@ Or:
 The C<builder_class> is set to L<ElasticSearch::SearchBuilder> by default.
 This can be changed, eg:
 
-    $es = Elasticsearch::Compat->new(
+    $es = Search::Elasticsearch::Compat->new(
             servers         => '127.0.0.1:9200',
             builder_class   => 'My::Builder'
     );

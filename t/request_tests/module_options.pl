@@ -12,5 +12,4 @@ ok $es->nodes->{nodes}{$node_id}{transportAddress}, ' - got camel case';
 ok $es->camel_case(0) == 0, ' - camel case off';
 ok $es->nodes->{nodes}{$node_id}{transport_address}, ' - got underscores';
 
-
 1

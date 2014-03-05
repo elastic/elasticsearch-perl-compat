@@ -79,7 +79,7 @@ ok $es->search( index => 'es_test_1', stats => 'foo' ),
 ok $r= $es->index_stats( clear => 1, search => 1, groups => 'foo' )
     ->{_all}{primaries}{search}{groups}{foo}, ' - stats with groups';
 
-throws_ok { $es->index_stats( index => 'foo' ) }
-qr/Missing/, ' - index missing';
+throws_ok { $es->index_stats( index => 'foo' ) } qr/Missing/,
+    ' - index missing';
 
 1;

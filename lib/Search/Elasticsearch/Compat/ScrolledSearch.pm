@@ -1,9 +1,9 @@
-package Elasticsearch::Compat::ScrolledSearch;
+package Search::Elasticsearch::Compat::ScrolledSearch;
 
 use strict;
 use warnings FATAL => 'all', NONFATAL => 'redefine';
 
-use Elasticsearch::Util qw(parse_params);
+use Search::Elasticsearch::Util qw(parse_params);
 
 # ABSTRACT: A wrapper for managing scrolled searches
 
@@ -11,7 +11,7 @@ use Elasticsearch::Util qw(parse_params);
 
     $scroller = $es->scrolled_search($search_params);
   OR
-    $scroller = Elasticsearch::Compat::ScrolledSearch($es,$search_params);
+    $scroller = Search::Elasticsearch::Compat::ScrolledSearch($es,$search_params);
 
     while (my $result = $scroller->next) {
         # do something
@@ -24,9 +24,9 @@ use Elasticsearch::Util qw(parse_params);
 
 =head1 DESCRIPTION
 
-C<Elasticsearch::Compat::ScrolledSearch> is a convenience iterator for scrolled
+C<Search::Elasticsearch::Compat::ScrolledSearch> is a convenience iterator for scrolled
 searches. It accepts the standard search parameters that would be passed
-to L<Elasticsearch::Compat/"search()">. The C<scroll> parameter defaults to C<1m>.
+to L<Search::Elasticsearch::Compat/"search()">. The C<scroll> parameter defaults to C<1m>.
 
     $scroller = $es->scrolled_search(
                     query  => {match_all=>{}},
@@ -40,7 +40,7 @@ to L<Elasticsearch::Compat/"search()">. The C<scroll> parameter defaults to C<1m
 
     $scroller = $es->scrolled_search($search_params);
   OR
-    $scroller = Elasticsearch::Compat::ScrolledSearch($es,$search_params);
+    $scroller = Search::Elasticsearch::Compat::ScrolledSearch($es,$search_params);
 
 =cut
 
@@ -201,9 +201,9 @@ sub facets {
 
 =head1 SEE ALSO
 
-L<Elasticsearch::Client::Compat/"scrolled_search()">,
-L<Elasticsearch::Client::Compat/"search()"> and
-L<Elasticsearch::Client::Compat/"scroll()">
+L<Search::Elasticsearch::Client::Compat/"scrolled_search()">,
+L<Search::Elasticsearch::Client::Compat/"search()"> and
+L<Search::Elasticsearch::Client::Compat/"scroll()">
 
 =cut
 
