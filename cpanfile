@@ -1,6 +1,6 @@
 requires "Any::URI::Escape" => "0";
 requires "Carp" => "0";
-requires "Elasticsearch" => "0.76";
+requires "Elasticsearch" => "1.05";
 requires "JSON" => "0";
 requires "Moo" => "0";
 requires "Scalar::Util" => "0";

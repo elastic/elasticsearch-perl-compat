@@ -1,13 +1,13 @@
 package Elasticsearch::Compat;
 
 use Moo;
-use Elasticsearch 0.76;
+use Elasticsearch 1.05;
 
 use Scalar::Util qw(openhandle);
 use Elasticsearch::Util qw(parse_params);
 use namespace::clean;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 #===================================
 sub new {
@@ -54,9 +54,22 @@ sub new {
 
 __END__
 
-# ABSTRACT: A compatibility layer for migrating from ElasticSearch.pm
+# ABSTRACT: DEPRECATED: A compatibility layer for migrating from ElasticSearch.pm
 
 =head1 DESCRIPTION
+
+B<THIS MODULE IS DEPRECATED.>
+
+******************************************************************************
+
+Because of the name clash between C<ElasticSearch.pm> and C<Elasticsearch.pm>
+this module has been renamed to : L<Search::Elasticsearch::Compat>.
+
+See L<https://github.com/elasticsearch/elasticsearch-perl/issues/20> for details.
+
+This distribution will be removed from CPAN in 2015. Please update your code.
+
+******************************************************************************
 
 With the release of the official new L<Elasticsearch> module, the old
 L<ElasticSearch> (note the change in case) module has been deprecated. This module,

@@ -1,5 +1,10 @@
 Revision history for Elasticsearch-Compat
 
+0.05    2014-03-05
+
+        Deprecated the Elasticsearch namespace in favour of Search::Elasticsearch.
+        See https://github.com/elasticsearch/elasticsearch-perl/issues/20
+
 0.04    2014-02-27
         Changed the dependency list to rely on Elasticsearch, rather
         than on classes within that dist.
